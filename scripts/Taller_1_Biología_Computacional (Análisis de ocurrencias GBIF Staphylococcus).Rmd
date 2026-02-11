@@ -5,7 +5,60 @@ date: "2026-02-10"
 output: html_document
 ---
 
-En Colombia, Staphylococcus aureus es un patógeno de gran importancia en salud pública porque causa con frecuencia infecciones de piel, tejidos blandos y cuadros más graves en hospitales, y porque muchas de sus cepas han desarrollado resistencia a antibióticos, especialmente a la meticilina (MRSA). En Medellín y su área metropolitana, esta bacteria es relevante tanto en el ámbito hospitalario como comunitario, donde se ha evidenciado colonización en personas sanas y en pacientes con factores de riesgo, lo que facilita su transmisión. Su presencia constante y su resistencia antimicrobiana hacen necesario fortalecer la vigilancia epidemiológica, las medidas de control de infecciones y el uso adecuado de antibióticos en la región.
+El grupo de interés corresponde al género Staphylococcus Rosenbach, 1884, un grupo de bacterias Gram positivas de morfología cocoide que se disponen en racimos y pertenecen a la familia Staphylococcaceae. Este género incluye especies de gran relevancia médica y veterinaria, como Staphylococcus aureus, asociada a infecciones cutáneas, respiratorias y sistémicas, así como a fenómenos de resistencia antimicrobiana. Además, varias especies forman parte de la microbiota normal de humanos y animales, lo que las convierte en un grupo clave para estudiar la transición entre comensalismo y patogenicidad. Su importancia en salud pública y epidemiología hace que analizar su distribución geográfica sea particularmente interesante.
+
+La búsqueda de los datos se realizó en la plataforma GBIF (Global Biodiversity Information Facility) el 10 de febrero de 2026, mediante una consulta por nombre científico utilizando el término “Staphylococcus Rosenbach, 1884”, restringido al nivel taxonómico de género.
+
+#Se aplicaron los siguientes parámetros de filtro:
+
+-Continente: North America y South America
+-País: Colombia
+-Área geográfica específica: se delimitó mediante un polígono con las siguientes coordenadas:
+POLYGON((-73.79754 8.34764, -77.06595 8.13402, -77.34366 3.24209, -74.01116 2.79348, -70.44368 4.99378, -73.79754 8.34764))
+-Tipo de registro: Occurrence (registros de ocurrencia biológica).
+
+-La descarga se realizó en formato Simple (27 KB), bajo licencia CC BY-NC 4.0, incluyendo datos provenientes de 26 datasets, publicados por 18 instituciones de 4 países.
+
+La citación oficial del recurso es:
+
+GBIF.org (10 February 2026). GBIF Occurrence Download. https://doi.org/10.15468/dl.4uj77t
+
+Estos datos permiten analizar la distribución espacial del género Staphylococcus en Colombia dentro del polígono definido, facilitando estudios de biodiversidad microbiana, biogeografía y posibles patrones epidemiológicos.
+
+##Para la organización de los datos se usaron los siguientes comandos: 
+
+1. Creación del directorio "Taller1"
+bamunoz@Brahyan:~$ cd Biocom_repo/
+bamunoz@Brahyan:~/Biocom_repo$ mkdir taller1
+bamunoz@Brahyan:~/Biocom_repo$ ls
+Bio_Computacional_2026  taller1
+
+1.1. Creación del subdirectorio Data y subida del archivo del GBIF
+bamunoz@Brahyan:~/Biocom_repo$ cd taller1/
+bamunoz@Brahyan:~/Biocom_repo/taller1$ mkdir data
+bamunoz@Brahyan:~/Biocom_repo/taller1$ ls
+data
+
+bamunoz@Brahyan:~/Biocom_repo/taller1/data$ cp /mnt/c/Users/brahy/Biologia_Computacional/Proyecto_S_aureus/Datos_S.aureus.csv .
+bamunoz@Brahyan:~/Biocom_repo/taller1/data$ ls
+Datos_S.aureus.csv
+bamunoz@Brahyan:~/Biocom_repo/taller1/data$ ls
+Datos_S.aureus.csv
+
+1.2. Creación del subdirectorio Scripts y subida del archivo .Rmd
+bamunoz@Brahyan:~/Biocom_repo/taller1$ mkdir scripts
+bamunoz@Brahyan:~/Biocom_repo/taller1$ ls
+data  scripts
+
+bamunoz@Brahyan:~/Biocom_repo/taller1/scripts$ cp /mnt/c/Users/brahy/Biologia_Computacional/Proyecto_S_aureus/Taller_1_Biología_Computacional\ \(Análisis\ de\ ocurrencias\ GBIF\ Staphylococcus\).Rmd .
+bamunoz@Brahyan:~/Biocom_repo/taller1/scripts$ ls
+'Taller_1_Biología_Computacional (Análisis de ocurrencias GBIF Staphylococcus).Rmd'
+
+3. Conteo de filas del documento descargado
+bamunoz@Brahyan:~/Biocom_repo/taller1/data$ cd ..
+bamunoz@Brahyan:~/Biocom_repo/taller1$ cd data/
+bamunoz@Brahyan:~/Biocom_repo/taller1/data$ wc -l Datos_S.aureus.csv
+972 Datos_S.aureus.csv
 
 ```{r scapto, echo=FALSE}
 # definimos como directorio de trabajo la carpeta creada
@@ -27,7 +80,23 @@ tabla_sp <- table(gbif_data$species)
 
 ## Incluir Gráficos
 
-Cuantas especies de este género se reportan en la base de datos?  
+Cuantas especies de este género se reportan en la base de datos? 
+
+#Interpretación grafico
+El gráfico muestra el número de ocurrencias registradas en GBIF para diferentes especies del género Staphylococcus dentro del área y filtros seleccionados.
+
+Se observa una distribución altamente desigual entre las especies:
+Staphylococcus agnetis es la especie con mayor número de registros (aprox. 480–500), lo que indica que es la más reportada en la base de datos para la zona analizada.
+Le sigue Staphylococcus aureus con cerca de 280–300 registros, lo cual es esperable dado que es una de las especies más estudiadas por su importancia clínica.
+Un segundo grupo de especies como S. chromogenes, S. epidermidis, S. haemolyticus, S. devriesei y S. warneri presenta un número intermedio de registros (entre ~20 y 50).
+Otras especies como S. hominis, S. hyicus, S. pasteuri, S. pseudoxylosus, S. saprophyticus y S. xylosus muestran muy pocos registros, lo que podría indicar menor presencia en el área, menor esfuerzo de muestreo o menor reporte en bases de datos abiertas.
+
+En conjunto, el gráfico sugiere que la ocurrencia registrada en GBIF no está uniformemente distribuida entre especies, sino que está concentrada en unas pocas, posiblemente debido a:
+Mayor importancia clínica o veterinaria.
+Mayor interés investigativo.
+Diferencias en esfuerzo de muestreo.
+Disponibilidad de datos publicados y compartidos en GBIF.
+Esto indica que cualquier análisis ecológico o biogeográfico debe considerar el posible sesgo de muestreo y la representatividad desigual entre especies.
 
 ```{r barplot, echo=FALSE}
 # Ajustar márgenes (más espacio abajo para los nombres)
