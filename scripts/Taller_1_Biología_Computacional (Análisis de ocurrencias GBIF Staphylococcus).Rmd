@@ -1,0 +1,49 @@
+---
+title: "Taller_1_Biología_Computacional (Análisis de ocurrencias GBIF Staphylococcus)"
+author: "Brahyan_Muñoz"
+date: "2026-02-10"
+output: html_document
+---
+
+En Colombia, Staphylococcus aureus es un patógeno de gran importancia en salud pública porque causa con frecuencia infecciones de piel, tejidos blandos y cuadros más graves en hospitales, y porque muchas de sus cepas han desarrollado resistencia a antibióticos, especialmente a la meticilina (MRSA). En Medellín y su área metropolitana, esta bacteria es relevante tanto en el ámbito hospitalario como comunitario, donde se ha evidenciado colonización en personas sanas y en pacientes con factores de riesgo, lo que facilita su transmisión. Su presencia constante y su resistencia antimicrobiana hacen necesario fortalecer la vigilancia epidemiológica, las medidas de control de infecciones y el uso adecuado de antibióticos en la región.
+
+```{r scapto, echo=FALSE}
+# definimos como directorio de trabajo la carpeta creada
+setwd("C:/Users/brahy/Biologia_Computacional/Proyecto_S_aureus")
+# leemos los datos descargados y guardados
+gbif_data <- read.csv(
+  "Datos_S.aureus.csv",
+  row.names = NULL, #necesario para que no numere las filas 
+  stringsAsFactors = FALSE, 
+  sep = "\t" #la separación de columnas es tipo "tab"
+)
+
+#gbif_data <- read_csv("Datos_S.aureus.csv")
+
+#Cuantas especies hay?
+tabla_sp <- table(gbif_data$species)
+
+```
+
+## Incluir Gráficos
+
+Cuantas especies de este género se reportan en la base de datos?  
+
+```{r barplot, echo=FALSE}
+# Ajustar márgenes (más espacio abajo para los nombres)
+par(mar = c(10, 5, 4, 2))
+
+barplot(
+tabla_sp,
+las = 2, # etiquetas verticales
+col = "#B3DFD6", 
+border = "black", 
+main = "Ocurrencias de staphylococcus por especie (GBIF)",
+ylab = "Número de registros",
+cex.names = 0.9, # tamaño de nombres en eje X
+cex.axis = 0.9, # tamaño de números
+cex.lab = 1.1, # tamaño etiquetas de ejes
+cex.main = 1.2 # tamaño del título
+)
+
+```
